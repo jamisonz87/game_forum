@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home | Forum
+{% endblock %}
+
+{% block body %}
+<main role="main" style="margin-top:60px;">
+    <div class="forum-sub-title text-center">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for_security('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for_security('login') }}">Login</a> |
+        <a href="{{ url_for_security('register') }}">Register</a>
+        {% endif %}
+    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+    
+                <div class="ibox-content m-b-sm border-bottom">
+                    <div class="p-xs">
+                        <h2>Welcome to Game World Forum</h2>
+                        <span>Choose from the many different types of games</span>
+                    </div>
+                </div>
+    
+                <div class="ibox-content forum-container">
+    
+                    <div class="forum-title">
+                        <h3>General subjects</h3>
+                    </div>
+    
+                    <div class="forum-item">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="forum-icon">
+                                    <i class="fa fa-gamepad"></i>
+                                </div>
+                                <a href="{{ url_for('games') }}" class="forum-item-title">Video Games</a>
+                                <div class="forum-sub-title">Talk about Nintendo, Playstation, Xbox, PC, etc.</div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <span class="views-number">
+                                    {{ thread_game_count }}
+                                </span>
+                                <div>
+                                    <small>Posts</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forum-item">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="forum-icon">
+                                    <i class="fa fa-delicious"></i>
+                                </div>
+                                <a href="{{ url_for('board') }}" class="forum-item-title">Board Games</a>
+                                <div class="forum-sub-title">Like monopoly? Share your favorite board game with others. </div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <span class="views-number">
+                                    {{ thread_board_count }}
+                                </span>
+                                <div>
+                                    <small>Posts</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forum-item">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="forum-icon">
+                                    <i class="fa fa-list-alt"></i>
+                                </div>
+                                <a href="{{ url_for('card') }}" class="forum-item-title">Card Games</a>
+                                <div class="forum-sub-title">This is the place for magic the gathering fans or Yugioh? Or card games in general</div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <span class="views-number">
+                                    {{ thread_card_count }}
+                                </span>
+                                <div>
+                                    <small>Posts</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="forum-item">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="forum-icon">
+                                    <i class="fa fa-futbol-o"></i>
+                                </div>
+                                <a href="{{ url_for('sports') }}" class="forum-item-title">Sport Games</a>
+                                <div class="forum-sub-title">Whose better Lebron James or Micheal Jordan? Discuss it here!!!</div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <span class="views-number">
+                                    {{ thread_sport_count }}
+                                </span>
+                                <div>
+                                    <small>Posts</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  
+</main>
+{% endblock %}

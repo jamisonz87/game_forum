@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title%}
+Card | Thread
+{% endblock %}
+
+{% block body %}
+<main role="main" style="margin-top:60px;">
+    <div class="forum-sub-title text-center">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for_security('logout') }}">Logout</a>
+        {% else %}
+        <a href="{{ url_for_security('login') }}">Login</a> |
+        <a href="{{ url_for_security('register') }}">Register</a>
+        {% endif %}
+    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox-content forum-container">
+                        <h3>{{ thread.title }}</h3>
+                </div>
+
+                <div class="ibox-content forum-container">
+                    <div class="forum-item">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="forum-icon">
+                                    <i class="fa fa-gamepad"></i>
+                                </div>
+                                <div class="forum-item-title">{{ thread.title }}</div>
+                                <div class="forum-sub-title">{{ thread.description }}</div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <div>
+                                    <small></small>
+                                </div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <div>
+                                    <small>{{ thread.date_created.strftime('%Y %b, %d')}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for reply in replies %}
+                    <div class="ibox-content forum-container">
+                        <div class="forum-item">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="forum-icon">
+                                        <i class="fa fa-list-alt"></i>
+                                    </div>
+                                    <div class="forum-sub-title">{{ reply.message }}</div>
+                                </div>
+                                <div class="col-md-1 forum-info">
+                                    <div>
+                                        <small>{{reply.user.username}}</small>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-1 forum-info">
+                                    <div>
+                                        <small>{{ reply.date_created.strftime('%Y %b, %d')}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if current_user.is_authenticated %}
+                <div class="ibox-content forum-container">
+                    <form method="POST" action="{{ url_for('card_thread', thread_id=thread.id) }}">
+                        {{ form.csrf_token}}
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">Post Reply</label>
+                            {{ form.message(class="form-control", rows=6) }}
+                        </div>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </form>
+                </div>
+                {% endif%}
+            </div>
+        </div>
+    </div>
+</div>
+  
+</main>
+{% endblock %}
